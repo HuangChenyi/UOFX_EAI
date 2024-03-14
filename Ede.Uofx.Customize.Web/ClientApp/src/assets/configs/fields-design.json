@@ -18,6 +18,18 @@
         "minCols": 1,
         "minRows": 1
       }
+    },
+    {
+      "group": "group1",
+      "code": "demo-field",
+      "name": "demo-field",
+      "icon": "assets/icons/u-plugin-form.svg",
+      "sizeConfig": {
+        "defaultCols": 4,
+        "defaultRows": 2,
+        "minCols": 4,
+        "minRows": 2
+      }
     }
   ]
 }

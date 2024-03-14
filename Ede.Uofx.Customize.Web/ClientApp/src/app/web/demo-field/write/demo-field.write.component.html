@@ -1,0 +1,27 @@
+<div>
+  <uofx-form-field-name [name]="name" [required]="required">
+  </uofx-form-field-name>
+</div>
+<div class="fw-control">
+  <table [formGroup]="form">
+    <tr>
+      <!-- hello world 顯示歡迎訊息 -->
+      <th colspan="3">
+        <span n *ngIf="exProps?.isShowHelloWorld ? true : false"
+          >hello 外掛欄位 write mode</span
+        >
+      </th>
+    </tr>
+    <tr>
+      <td colspan="3">
+
+        <input type="text" pInputText formControlName="message"/>
+
+        <uofx-form-error-tip [control]="form?.controls.message">
+        </uofx-form-error-tip>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
