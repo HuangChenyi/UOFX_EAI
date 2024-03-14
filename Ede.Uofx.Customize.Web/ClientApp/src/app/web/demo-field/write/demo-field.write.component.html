@@ -3,25 +3,60 @@
   </uofx-form-field-name>
 </div>
 <div class="fw-control">
+
   <table [formGroup]="form">
     <tr>
-      <!-- hello world 顯示歡迎訊息 -->
-      <th colspan="3">
-        <span n *ngIf="exProps?.isShowHelloWorld ? true : false"
-          >hello 外掛欄位 write mode</span
-        >
-      </th>
+      <td>
+        <label>Company Name</label>
+      </td>
+      <td>
+        <ng-container *ngIf="editable; else readonlyInput">
+          <input type="text" formControlName="companyName" required>
+          <div *ngIf="form.get('companyName').invalid && (form.get('companyName').dirty || form.get('companyName').touched)">
+            <div style="color: red;" *ngIf="form.get('companyName').errors.required">Company Name is required.</div>
+          </div>
+        </ng-container>
+        <ng-template #readonlyInput>
+          <span>{{ form.get('companyName').value }}</span>
+        </ng-template>
+      </td>
     </tr>
     <tr>
-      <td colspan="3">
-
-        <input type="text" pInputText formControlName="message"/>
-
-        <uofx-form-error-tip [control]="form?.controls.message">
-        </uofx-form-error-tip>
+      <td>
+        <label>Address</label>
+      </td>
+      <td>
+        <ng-container *ngIf="editable; else readonlyInput">
+          <input type="text" formControlName="address" required>
+          <div *ngIf="form.get('address').invalid && (form.get('address').dirty || form.get('address').touched)">
+            <div style="color: red;" *ngIf="form.get('address').errors.required">Address is required.</div>
+          </div>
+        </ng-container>
+        <ng-template #readonlyInput>
+          <span>{{ form.get('address').value }}</span>
+        </ng-template>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label>Phone</label>
+      </td>
+      <td>
+        <ng-container *ngIf="editable; else readonlyInput">
+          <input type="text" formControlName="phone" pattern="[0-9]{10}">
+          <div *ngIf="form.get('phone').invalid && (form.get('phone').dirty || form.get('phone').touched)">
+            <div style="color: red;" *ngIf="form.get('phone').errors.pattern">Invalid phone number format.</div>
+          </div>
+        </ng-container>
+        <ng-template #readonlyInput>
+          <span>{{ form.get('phone').value }}</span>
+        </ng-template>
       </td>
     </tr>
   </table>
+
 </div>
+
+
 
 

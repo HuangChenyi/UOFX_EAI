@@ -39,7 +39,7 @@ export class DemoFieldWriteComponent
   /*修改*/
   /*置換className*/
   @Input() exProps: DemoFieldExProps;
-
+@Input() value:customerInfo
   form: UntypedFormGroup;
   constructor(
     private cdr: ChangeDetectorRef,
@@ -69,6 +69,7 @@ export class DemoFieldWriteComponent
     this.form.valueChanges.subscribe((res) => {
       this.selfControl?.setValue(res);
       /*真正送出欄位值變更的函式*/
+      console.log(res);
       this.valueChanges.emit(res);
     });
     this.cdr.detectChanges();
@@ -76,7 +77,9 @@ export class DemoFieldWriteComponent
 
   initForm() {
     this.form = this.fb.group({
-      message: [this.value?.message || '', Validators.required], // Add required validation
+      companyName: [this.value?.companyName || '', Validators.required],
+      address: [this.value?.address || '', Validators.required],
+      phone: [this.value?.phone || '', [Validators.pattern(/^09\d{8}$/)]],
     });
 
     if (this.selfControl) {
@@ -101,4 +104,11 @@ function validateSelf(form: UntypedFormGroup): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     return form.valid ? null : { formInvalid: true };
   };
+}
+
+
+export interface customerInfo {
+  companyName: string;
+  address: string;
+  phone: string;
 }
