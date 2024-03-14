@@ -18,6 +18,8 @@ import { BpmFwWriteComponent, UofxFormTools } from '@uofx/web-components/form';
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 
 import { DemoFieldExProps } from '../props/demo-field.props.component';
+import { categorys } from 'src/app/model/eaiModel';
+import { eaiService } from '@service/eai-service';
 
 /*修改*/
 /*↑↑↑↑修改import 各模式的Component↑↑↑↑*/
@@ -41,10 +43,16 @@ export class DemoFieldWriteComponent
   @Input() exProps: DemoFieldExProps;
 @Input() value:customerInfo
   form: UntypedFormGroup;
+items:Array<categorys>=[];
+
+
+
+
   constructor(
     private cdr: ChangeDetectorRef,
     private fb: UntypedFormBuilder,
-    private tools: UofxFormTools
+    private tools: UofxFormTools,
+     private es:eaiService
   ) {
     super();
   }
@@ -54,6 +62,11 @@ export class DemoFieldWriteComponent
   ngOnInit(): void {
 
     this.initForm();
+
+    this.es.serverUrl=this.pluginSetting.entryHost;
+    this.es.getCategorys().subscribe((res)=>{
+      this.items=res;
+    })
 
     this.parentForm.statusChanges.subscribe((res) => {
       if (res === 'INVALID' && this.selfControl.dirty) {
@@ -77,6 +90,7 @@ export class DemoFieldWriteComponent
 
   initForm() {
     this.form = this.fb.group({
+      category:this.value?.category||'',
       companyName: [this.value?.companyName || '', Validators.required],
       address: [this.value?.address || '', Validators.required],
       phone: [this.value?.phone || '', [Validators.pattern(/^09\d{8}$/)]],
@@ -111,4 +125,5 @@ export interface customerInfo {
   companyName: string;
   address: string;
   phone: string;
+  category:string;
 }

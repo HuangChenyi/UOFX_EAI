@@ -7,6 +7,18 @@
   <table [formGroup]="form">
     <tr>
       <td>
+類別
+      </td>
+      <td>
+        <p-dropdown
+        [showClear]="true" [options]="items" formControlName="category"
+        [placeholder]="'global.comm.select.default-placeholder' | translate"
+        optionLabel="categoryName" optionValue="categoryID" styleClass="width-100"
+      ></p-dropdown>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <label>Company Name</label>
       </td>
       <td>
@@ -26,13 +38,13 @@
         <label>Address</label>
       </td>
       <td>
-        <ng-container *ngIf="editable; else readonlyInput">
+        <ng-container *ngIf="editable; else readonlyInput1">
           <input type="text" formControlName="address" required>
           <div *ngIf="form.get('address').invalid && (form.get('address').dirty || form.get('address').touched)">
             <div style="color: red;" *ngIf="form.get('address').errors.required">Address is required.</div>
           </div>
         </ng-container>
-        <ng-template #readonlyInput>
+        <ng-template #readonlyInput1>
           <span>{{ form.get('address').value }}</span>
         </ng-template>
       </td>
@@ -42,13 +54,13 @@
         <label>Phone</label>
       </td>
       <td>
-        <ng-container *ngIf="editable; else readonlyInput">
+        <ng-container *ngIf="editable; else readonlyInput2">
           <input type="text" formControlName="phone" pattern="[0-9]{10}">
           <div *ngIf="form.get('phone').invalid && (form.get('phone').dirty || form.get('phone').touched)">
             <div style="color: red;" *ngIf="form.get('phone').errors.pattern">Invalid phone number format.</div>
           </div>
         </ng-container>
-        <ng-template #readonlyInput>
+        <ng-template #readonlyInput2>
           <span>{{ form.get('phone').value }}</span>
         </ng-template>
       </td>
