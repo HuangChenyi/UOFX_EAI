@@ -18,6 +18,8 @@ import { BpmFwWriteComponent, UofxFormTools } from '@uofx/web-components/form';
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 
 import { DemoFieldExProps } from '../props/demo-field.props.component';
+import { SelectDataComponent } from '../select-data/select-data.component';
+import { UofxDialogController } from '@uofx/web-components/dialog';
 import { categorys } from 'src/app/model/eaiModel';
 import { eaiService } from '@service/eai-service';
 
@@ -35,37 +37,55 @@ import { eaiService } from '@service/eai-service';
 /*置換className*/
 export class DemoFieldWriteComponent
   extends BpmFwWriteComponent
-  implements OnInit
-{
+  implements OnInit {
 
   /*修改*/
   /*置換className*/
   @Input() exProps: DemoFieldExProps;
-@Input() value:customerInfo
+  @Input() value: customerInfo
   form: UntypedFormGroup;
-items:Array<categorys>=[];
+  items: Array<categorys> = [];
 
-
+  returnValue:string="QQQ";
 
 
   constructor(
     private cdr: ChangeDetectorRef,
     private fb: UntypedFormBuilder,
     private tools: UofxFormTools,
-     private es:eaiService
+    private es: eaiService,
+    private dialogCtrl: UofxDialogController
   ) {
     super();
   }
 
+  Open()
+  {
+this.dialogCtrl.create({
+  component: SelectDataComponent,
+  size: 'large',
+  params: {
+     /*開窗要帶的參數*/
+     url:this.pluginSetting.entryHost
+  }
+}).afterClose.subscribe({
+  next: res => {
+  /*關閉視窗後處理的訂閱事件*/
 
+  if (res) {
+    this.returnValue = res;
+   }
+}
+});
+  }
 
   ngOnInit(): void {
 
     this.initForm();
 
-    this.es.serverUrl=this.pluginSetting.entryHost;
-    this.es.getCategorys().subscribe((res)=>{
-      this.items=res;
+    this.es.serverUrl = this.pluginSetting.entryHost;
+    this.es.getCategorys().subscribe((res) => {
+      this.items = res;
     })
 
     this.parentForm.statusChanges.subscribe((res) => {
@@ -90,7 +110,7 @@ items:Array<categorys>=[];
 
   initForm() {
     this.form = this.fb.group({
-      category:this.value?.category||'',
+      category: this.value?.category || '',
       companyName: [this.value?.companyName || '', Validators.required],
       address: [this.value?.address || '', Validators.required],
       phone: [this.value?.phone || '', [Validators.pattern(/^09\d{8}$/)]],
@@ -125,5 +145,5 @@ export interface customerInfo {
   companyName: string;
   address: string;
   phone: string;
-  category:string;
+  category: string;
 }

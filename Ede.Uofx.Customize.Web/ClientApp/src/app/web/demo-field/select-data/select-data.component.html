@@ -1,0 +1,29 @@
+<p-dialog #pDialog [visible]="visible" >
+  <ng-template pTemplate="header">
+    <uofx-dialog-header>
+       <!-- Dialog 表頭顯示處理 -->
+       這是標題
+     </uofx-dialog-header>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <uofx-dialog-body>
+      <div class="padding-3x">
+         <!-- Dialog 表身顯示處理 -->
+         <!-- 通常是放明細內容或需編輯內容-->
+         這是內文
+         {{this.params.url}}
+      </div>
+    </uofx-dialog-body>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <uofx-dialog-footer>
+         <!-- Dialog 表尾顯示處理 -->
+         <!-- 通常是放Button(EX:確定、關閉視窗.....) -->
+         <button
+            class="e-btn u-btn-primary buttons-opposite"
+             data-ripple="true"
+            (click)="Add()">關閉視窗
+          </button>
+    </uofx-dialog-footer>
+  </ng-template>
+</p-dialog>
