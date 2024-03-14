@@ -38,23 +38,24 @@ export class DemoFieldPropsComponent
     this.initForm();
 
     /*外掛欄位額外屬性設定(條件站點、簽核條件、主旨....)*/
-    // this.initPluginSettings({
-    //   /*toBeConditions外掛欄位條件來源、name表單設計顯示條件名稱、
-    //   jsonPath欄位值來源、type條件型態、Text(文字)、Numeric(數值)、Department(部門)、Employee(人員)*/
-    //   toBeConditions: [
-    //     { name: '條件名稱', jsonPath: 'jsonPath', type: 'Text' },
-    //   ],
-    //   /*toBeNodes簽核站點簽核者來自外掛欄位，name簽核型態顯示名稱 jsonPath欄位值來源*/
-    //   toBeNodes: [{ name: '簽核名稱', jsonPath: 'jsonPath' }],
-    //   /*toBeSubjects表單主旨資料來源，name主旨名稱 jsonPath欄位值來源*/
-    //   toBeSubjects: [{ name: '主旨', jsonPath: 'jsonPath' }],
-    //   /*toBeCalculates計算欄位資料來源，name欄位資料名稱 jsonPath欄位值來源*/
-    //   toBeCalculates: [{ name: '計算資料名稱', jsonPath: 'jsonPath' }],
-    //   /*toBeExports表單匯出資料來源，name欄位資料名稱 jsonPath欄位值來源*/
-    //   toBeExports: [{ name: '匯出資料', jsonPath: 'jsonPath' }],
-    //   /*searchContentJsonPath表單查詢條件來源，jsonPath欄位值來源*/
-    //   searchContentJsonPath: 'jsonPath',
-    // });
+    this.initPluginSettings({
+      /*toBeConditions外掛欄位條件來源、name表單設計顯示條件名稱、
+      jsonPath欄位值來源、type條件型態、Text(文字)、Numeric(數值)、Department(部門)、Employee(人員)*/
+      toBeConditions: [
+        { name: '公司名稱', jsonPath: 'companyName', type: 'Text' },
+      ],
+      /*toBeNodes簽核站點簽核者來自外掛欄位，name簽核型態顯示名稱 jsonPath欄位值來源*/
+     // toBeNodes: [{ name: '簽核名稱', jsonPath: 'jsonPath' }],
+      /*toBeSubjects表單主旨資料來源，name主旨名稱 jsonPath欄位值來源*/
+      toBeSubjects: [{ name: '公司名稱', jsonPath: 'companyName' }
+    ,{ name: '地址', jsonPath: 'address' },{ name: '電話', jsonPath: 'phone' }],
+      /*toBeCalculates計算欄位資料來源，name欄位資料名稱 jsonPath欄位值來源*/
+    //  toBeCalculates: [{ name: '計算資料名稱', jsonPath: 'jsonPath' }],
+      /*toBeExports表單匯出資料來源，name欄位資料名稱 jsonPath欄位值來源*/
+   //   toBeExports: [{ name: '匯出資料', jsonPath: 'jsonPath' }],
+      /*searchContentJsonPath表單查詢條件來源，jsonPath欄位值來源*/
+   //   searchContentJsonPath: 'jsonPath',
+    });
   }
 
   initExProps() {
